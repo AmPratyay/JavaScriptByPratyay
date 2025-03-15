@@ -36,20 +36,3 @@ console.log(Math.floor(Math.random() * (max - min + 1)) + min)
 
 
 
-
-const otp = () => Math.floor(Math.random() * 1000000).toString();
-
-let arr = [];
-for(let i = 1; i < 600000; i++) {
-    let otpRes = otp();
-    if(arr.includes(otpRes)) {
-        console.log("duplicate found !" + i + "and "+ otpRes)
-        break;
-    }
-    arr.push(otpRes)
-}
-
-console.log(arr)
-
-
-
