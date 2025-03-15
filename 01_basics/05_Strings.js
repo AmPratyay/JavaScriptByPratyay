@@ -33,3 +33,17 @@ console.log(url.replace('%20', '-'))
 console.log(url.includes('sundar'))
 
 console.log(gameName.split('-'));
+
+
+
+const str3 = "Hello Javascript";
+
+console.log(str3.replace('Hello','World'));
+console.log(str3.replace(/hello/i,'World'));
+
+console.log(str3.lastIndexOf('Javascript'));
+
+
+
+
+
