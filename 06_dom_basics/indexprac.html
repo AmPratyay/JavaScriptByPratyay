@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body{
+            background-color: black;
+            color: #fff; 
+            font-size: 30px; 
+            font-weight: 400; 
+        }
+
+        li{
+            list-style:none;
+        }
+
+    </style>
+</head>
+<body>
+    <ul class="parent">
+        <li>Javascript</li>
+        <li>Python</li>
+        <li>Postgres</li>
+        <li>Sybase</li>
+        <li>Spring boot</li>
+        <li>Java</li>
+    </ul>
+</body>
+
+
+<script>
+
+    let childList = document.querySelector('li:nth-child(5)');
+
+    let newEleLi = document.createElement('li');
+    newEleLi.append(document.createTextNode("Graylog"));
+
+    childList.replaceWith(newEleLi)
+
+    let lastChild = document.querySelector('li:last-child');
+
+    let parent = document.querySelector('.parent')
+    parent.removeChild(lastChild)
+</script>
+</html>
