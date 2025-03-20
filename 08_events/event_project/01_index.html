@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Changer</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: black;
+            width: 100%;
+            height: 93vh;
+            background-repeat: no-repeat;
+        }
+
+        .heading{
+            margin-top: 50px;
+            color: white;
+        }
+
+        #start, #stop{
+            width: 180px;
+            height: 50px;
+            margin: 0 40px 0;
+            font-size: 20px;
+            font-weight: 700;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3), 4px 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .gradient{
+            margin-top: 50px;
+            height: 100px;
+            width: 680px;
+            background-color: white;
+            color: blue;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1), 4px 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+        }
+
+        .buttons{
+            margin-top: 50px;
+        }
+
+        .conatiner{
+            margin-left: 50px;
+        }
+
+        .error{
+            color: red;
+        }
+
+        /* Code added external for buttons  */
+
+
+        
+    </style>
+</head>
+<body>
+    
+
+    <div class="conatiner">
+        <h1 class="heading">Click on start to change the color every second</h1>
+        <div class="buttons">
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+        </div>
+
+        <div class="gradient">
+
+        </div>
+        <h2 class="error"></h2>
+    </div>
+
+
+    <script>
+
+        let intervalRunning = true;
+        let intervalFucn;
+
+        const start = document.getElementById('start');
+        const stoped = document.getElementById('stop');
+
+        const changeColor = () => {
+
+            const hex = '0123456789abcdef';
+            let color1 = '#';
+            let color2 = '#';
+            let color3 = '#';
+            let deg = ''
+
+            for(let i = 0; i < 6; i++){
+                color1 += hex[Math.floor(Math.random() * 16)];
+                color2 += hex[Math.floor(Math.random() * 16)];
+                color3 += hex[Math.floor(Math.random() * 16)];
+            }
+
+            deg = `${Math.round(Math.random() * 100)}deg`;
+            document.body.style.backgroundImage = `linear-gradient( ${deg} , ${color1}, ${color2}, ${color3})`;
+
+            document.querySelector('.gradient').innerText = ` background-image: linear-gradient( ${deg} , ${color1}, ${color2}, ${color3})`
+        }
+
+        const setIntervalFunc = () => {
+            intervalFucn = setInterval(changeColor,1000);
+        }
+
+        let setTmOut = 0;
+
+        const setTmotFunc = (error) => {
+            setTmOut = setTimeout(() => {
+            error.innerHTML = ``
+            clearTimeout(setTmOut)
+            setTmOut = 0;
+            },2500)
+        } 
+
+        start.addEventListener('click', (e) => {
+            if(intervalRunning) {
+                intervalRunning = false;
+                setIntervalFunc();
+            }else {
+                let error = document.querySelector('.error');
+                let paraEle = document.createElement('p');
+                paraEle.append(document.createTextNode('Already running , To stop press STOP button'));
+                error.appendChild(paraEle);
+                if(setTmOut === 0) {
+                    setTmotFunc(error);
+                }
+            }
+        });
+
+        stoped.addEventListener('click', () => {
+            console.log('stop clicked ');
+            intervalRunning = true;
+            clearInterval(intervalFucn);
+        });
+        
+
+    </script>
+</body>
+</html>
