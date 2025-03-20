@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Detector</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: black;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            background-color: red;
+            width: 600px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+        }
+
+        tr , td ,th {
+            border: 2px solid white;
+            padding: 10px;
+            width: 150px;
+            height: 20px;
+            text-align: center;
+            color: white;
+            font-weight: 900;
+        }
+
+        table{
+            border: 2px solid white;
+        }
+
+        th{
+            font-size: 20px;
+        }
+
+        td{
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    </div>
+
+
+
+    <script>
+
+        window.addEventListener('keydown', (event) =>{
+            let divContainer = document.querySelector('.container');
+            divContainer.innerHTML = `
+            <table>
+                <tr>
+                    <th>Key</th>
+                    <th>Key Code</th>
+                    <th>Code</th>
+                </tr>
+                <tr>
+                    <td>${event.key === ' ' ? 'Space' : event.key}</td>
+                    <td>${event.keyCode}</td>
+                    <td>${event.code}</td>
+                </tr>
+            </table>
+            `
+        }) 
+    </script>
+</body>
+</html>
