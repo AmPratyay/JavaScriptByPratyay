@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container{
+            height: 60%;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .inputText{
+            padding: 10px;
+            width: 300px;
+            height: 50%;
+        }
+
+        #btn{
+            /* display: inline-block; */
+            margin-top: 10px;
+            height: 40px;
+            width: 130px;
+            font-size: 20px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        #image{
+            background-color: aqua;
+            width: 200px;
+            height: 200px;
+            border: 2px solid rebeccapurple;
+        }
+
+        #divElem{
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            width: 350px;
+            height:200px;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="container">
+        <div id="divElem"></div>
+    </div>
+
+    <div>
+        <input class="inputText" type="text">
+        <button id="btn">Click Here</button>
+    </div>
+
+    <script>
+
+        const container = document.querySelector('.container');
+        const image1 =  document.createElement('img');
+        const divElem = document.getElementById('divElem');
+        let input = document.querySelector('.inputText');
+
+        document.getElementById('btn').addEventListener('click', () => {
+            if(input.value === ''){
+                alert('kuch to likh bhai ...')
+            } else {
+                const URL = `https://api.github.com/users/${input.value}`
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', URL);
+                xhr.onreadystatechange = function(){
+                    if (xhr.readyState === 4) {
+                        const data = JSON.parse(this.responseText)
+
+                        image1.id = 'image'
+                        image1.src = data.avatar_url
+                        container.appendChild(image1);
+
+                        if(divElem.innerHTML !== '') {
+                            divElem.innerHTML = ''
+                        }
+
+                        const name = document.createElement('p')
+                        name.innerHTML = `Name  : ${String(data.name)} <br>
+                            Follower  : ${Number(data.followers)} <br>
+                            Location  : ${String(data.location)} <br>
+                            Bio : ${String(data.bio)} <br>
+                            public_repos : ${data.public_repos}
+                        `;
+
+                        divElem.appendChild(name) 
+                    }
+                    
+                    
+                }
+                xhr.send();
+            }
+
+            input.value = ''
+
+        })
+        
+        
+    </script>
+</body>
+</html>
